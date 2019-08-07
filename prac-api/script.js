@@ -1,5 +1,4 @@
-
-
+let url = 'http://localhost:7000/api/item';
 
 document.getElementById('submit').addEventListener('click', (e)=> {
     e.preventDefault();
@@ -9,16 +8,11 @@ document.getElementById('submit').addEventListener('click', (e)=> {
 
    
 
-}, false);
-
-
-let url = 'http://localhost:7000/api/item';
-
 async function poster(){
     
 
     let item = {
-        item: 'gizmo'
+        item: x
     };
 
     let res = await fetch(url, {
@@ -35,9 +29,36 @@ async function poster(){
 
 
 }
+poster();
+
+}, false);
+
+
+document.getElementById('get').addEventListener('click', (e)=>{
+    e.preventDefault();
+    async function getter(){
+        let res = await fetch(url);
+    
+        let data = await res.json();
+        data.forEach(items => {
+            let ul = document.getElementById('ul');
+            let li = document.createElement('li');
+            li.textContent = items.item;
+
+            ul.appendChild(li);
+            //console.log(items);
+
+            
+        });
+        
+        //console.log(data);
+    }
+    
+    getter();
+});
 
 //poster();
-
+// get command
 async function getter(){
     let res = await fetch(url);
 
@@ -51,5 +72,5 @@ async function getter(){
     //console.log(data);
 }
 
-getter()
+getter();
  
